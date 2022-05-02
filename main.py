@@ -26,25 +26,32 @@ def main():
         if len(char) != 1: # If the character given is not one letter long.
             print("Invalid character. Must be a single character.") # Then print the error message and retry.
 
-    iterations = 0 # Amount of words to be inputted
-    while True:
-        iterations = input("Amount of words to check: ")
-        try:
+    iterations = 0 # Amount of words to be inputted.
+    while True: # Makes a constant loop for getting input.
+        iterations = input("Amount of words to check: ") # Gets the user input for the amount of words to check.
+        try: # Try getting an integer value from the given input.
             iterations = int(iterations)
-        except ValueError:
+        except ValueError: # If not given a valid number, then send a notice to the user, and try again.
             print("Invalid number.")
             continue
 
-        break
+        break # If a number is parsed successfully, then continue down the program.
 
 
-    for i in range(iterations):
-        inp = input(f"Word {i + 1}: ")
-        inputs.append(inp)
+    for i in range(iterations): # Loops for the amount of words to check.
+        while True:
+            inp = input(f"Word {i + 1}: ") # Asks the user for the given word we are currently checking for.
+            if " " in inp: # If the given input is not a single word, send a notice and try again.
+                print("Please provide a single word...")
+                continue
 
-    filtered = findChar(inputs, char)
+            break # If a single word is given, break from the loop.
 
-    print(f"Words with {char}: {filtered}")
+        inputs.append(inp) # Add the given input to the inputs array.
+
+    filtered = findChar(inputs, char) # Function call to retrieve all the given words that contain the original character.
+
+    print(f"Words with '{char}': {filtered}") # Outputs the words found to the user.
 
 
 if __name__ == "__main__":
